@@ -1,5 +1,7 @@
+using API.Data;
 using API.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -7,33 +9,33 @@ namespace API.Controllers;
 [Route("/api/products")]
 public class ProductsController : ControllerBase
 {
-
-
-  
-  [HttpGet]
-  public IActionResult GetProducts()
+  private readonly DataContext _context;
+  public ProductsController(DataContext context)
   {
-    return Ok(new List<Product>
-    {
-      new Product {Id=1, Name="Iphone 15", Description="Telefon Açıklaması", ImageUrl="1.jpg", Price=70000, Stock=100, IsActive=true},
-      new Product {Id=2, Name="Iphone 16", Description="Telefon Açıklaması", ImageUrl="2.jpg", Price=80000, Stock=100, IsActive=true},
-      new Product {Id=3, Name="Iphone 15 Pro", Description="Telefon Açıklaması", ImageUrl="3.jpg", Price=90000, Stock=100, IsActive=false},
-      new Product {Id=4, Name="Iphone 16 Pro Max", Description="Telefon Açıklaması", ImageUrl="4.jpg", Price=100000, Stock=100, IsActive=true},
-    });
+    _context = context;
+  }
+
+
+  [HttpGet]
+  public async Task<IActionResult> GetProducts()
+  {
+    var products = await _context.Products.ToListAsync();
+    return Ok(products);
   }
 
   [HttpGet("{id}")]
-  public IActionResult GetProduct(int id)
+  public async Task<IActionResult> GetProduct(int? id)
   {
-    return Ok(new Product
+    if (id == null)
     {
-      Id = 1,
-      Name = "Iphone 15",
-      Description = "Telefon Açıklaması",
-      ImageUrl = "1.jpg",
-      Price = 70000,
-      Stock = 100,
-      IsActive = true
-    });
+      return NotFound();
+    }
+    // var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id); 
+    var product = await _context.Products.FindAsync(id);
+    if (product == null)
+    {
+      return NotFound();
+    }
+    return Ok(product);
   }
 }
