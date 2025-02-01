@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
   return (
@@ -19,6 +19,12 @@ function ProductList() {
     { id: 2, name: 'Product 2', price: 200, isActive: true },
     { id: 3, name: 'Product 3', price: 300, isActive: false },
   ])
+
+  useEffect(() => {
+    fetch('http://localhost:5247/api/products')
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+  }, [])
 
   function addProduct() {
     setProducts([
