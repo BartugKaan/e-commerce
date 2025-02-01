@@ -1,6 +1,10 @@
+using API.Entity;
+using Microsoft.EntityFrameworkCore;
+
 namespace API.Data;
 
-public class DataContext : 
+//Primary constructor
+public class DataContext(DbContextOptions options) : DbContext(options)
 {
-
+  public DbSet<Product> Products => Set<Product>();
 }
