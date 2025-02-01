@@ -1,20 +1,9 @@
 import { useEffect, useState } from 'react'
-import { IProduct } from './model/IProduct'
+import { IProduct } from '../model/IProduct'
+import Header from './Header'
+import ProductList from './ProductList'
 
 function App() {
-  return (
-    <>
-      <Header />
-      <ProductList />
-    </>
-  )
-}
-
-function Header() {
-  return <h1>Header</h1>
-}
-
-function ProductList() {
   const [products, setProducts] = useState<IProduct[]>([])
 
   useEffect(() => {
@@ -37,23 +26,10 @@ function ProductList() {
       },
     ])
   }
-
   return (
     <>
-      <h2>Product List</h2>
-      {products.map((p) => p.isActive && <Product key={p.id} products={p} />)}
-
-      <button onClick={() => addProduct()}>Add Product</button>
-    </>
-  )
-}
-
-function Product(props: any) {
-  return (
-    <>
-      <h3>
-        {props.products.name} - <b>{props.products.price}</b>
-      </h3>
+      <Header products={products} />
+      <ProductList products={products} addProduct={addProduct} />
     </>
   )
 }
