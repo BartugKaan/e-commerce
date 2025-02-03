@@ -6,6 +6,7 @@ import {
   IconButton,
   List,
   ListItem,
+  Stack,
   Toolbar,
   Typography,
 } from '@mui/material'
@@ -28,19 +29,19 @@ const navStyles = {
 
 export default function Header() {
   return (
-    <AppBar position="static" sx={{ mr: 4 }}>
+    <AppBar position="static" sx={{ mb: 4 }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ mx: 4 }}>
             E-Commerce
           </Typography>
-          <List sx={{ display: 'flex' }}>
+          <Stack direction="row">
             {links.map((link) => (
               <ListItem component={NavLink} to={link.to} sx={navStyles}>
                 {link.title}
               </ListItem>
             ))}
-          </List>
+          </Stack>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton size="large" edge="start" color="inherit">
