@@ -37,7 +37,12 @@ export default function Header() {
           </Typography>
           <Stack direction="row">
             {links.map((link) => (
-              <ListItem component={NavLink} to={link.to} sx={navStyles}>
+              <ListItem
+                key={link.to}
+                component={NavLink}
+                to={link.to}
+                sx={navStyles}
+              >
                 {link.title}
               </ListItem>
             ))}
