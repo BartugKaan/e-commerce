@@ -32,8 +32,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//implemented for the purpose of serving static files
 app.UseStaticFiles();
 
+//implemented for the allow http://localhost:3000 to access the API
 app.UseCors(option =>
 {
     option.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
