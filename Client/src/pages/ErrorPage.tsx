@@ -1,5 +1,5 @@
 import { Button, Container } from '@mui/material'
-import request from '../api/Request'
+import request from '../api/request'
 
 export default function ErrorPage() {
   return (

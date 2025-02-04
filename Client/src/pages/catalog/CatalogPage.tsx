@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { IProduct } from '../../model/IProduct'
 import ProductList from './ProductList'
 import { CircularProgress, Container } from '@mui/material'
-import request from '../../api/Request'
+import request from '../../api/request'
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<IProduct[]>([])
