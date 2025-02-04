@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { IProduct } from '../../model/IProduct'
 import request from '../../api/request'
+import NotFound from '../../errors/NotFound'
 
 export default function ProductDetails() {
   const { id } = useParams<{ id: string }>()
@@ -38,11 +39,7 @@ export default function ProductDetails() {
   }
 
   if (!product) {
-    return (
-      <Container>
-        <Typography variant="h2">Product not found!!</Typography>
-      </Container>
-    )
+    return <NotFound />
   }
 
   return (
